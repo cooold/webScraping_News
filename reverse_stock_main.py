@@ -8,8 +8,8 @@ Date=input()
 headers_save =base_function.get_headers_save()
 Class_time=base_function.get_Class_time()
 Class_media=base_function.get_Class_media()
-Class_title=base_function.get_Class_title()
-Class_text=base_function.get_Class_title()
+#Class_title=base_function.get_Class_title()
+#Class_text=base_function.get_Class_text()
 
 
 #建立headers和網址
