@@ -7,7 +7,6 @@ import webbrowser
 import re
 
 def download_csv(headers,url):
-
     #爬取資料
     res = requests.get(url, headers=headers) 
     res.encoding = 'utf-8'
@@ -44,3 +43,25 @@ def download_csv(headers,url):
     #開啟下載
     webbrowser.get('firefox').open('file:///D:/daywork/TemporarilySave/save.html')
     time.sleep(8)
+
+def download_html(headers,url,state,Date):
+    #爬取資料
+    res = requests.get(url, headers=headers) 
+    res.encoding = 'utf-8'
+    if res.status_code == 200:
+       print("篩選網站成功回應")
+    else:
+        print("爬取失敗，伺服器沒有回應")
+    soup = BeautifulSoup(res.text,"html.parser")
+    #建立html
+    if state==0:
+        with open('D:/daywork/historicalHigh/'+Date+'歷史新高.html',"a",encoding="utf-8") as file:
+          file.write(str(soup))
+    if state==1:
+        with open('D:/daywork/InvestmentTrust/'+Date+'投信上市.html',"a",encoding="utf-8") as file:
+          file.write(str(soup))
+    if state==2:
+        with open('D:/daywork/InvestmentTrust/'+Date+'投信上櫃.html',"a",encoding="utf-8") as file:
+          file.write(str(soup))
+    time.sleep(5)
+    

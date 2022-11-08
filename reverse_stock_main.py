@@ -11,9 +11,25 @@ Class_media=base_function.get_Class_media()
 Class_title=base_function.get_Class_title()
 Class_text=base_function.get_Class_title()
 
+
 #建立headers和網址
 headers = {'user-agent': headers_save }
 url=base_function.get_url()
+
+historicalHigh_url=base_function.get_historicalHigh_url()
+InvestmentTrust_url1=base_function.get_InvestmentTrust_url1()
+InvestmentTrust_url2=base_function.get_InvestmentTrust_url2()
+
+#假日不抓
+Holiday=base_function.isNotHoliday(Date)
+if Holiday:
+    print('X今天不是假日,抓取投信和歷史新高X')
+    #抓取投信第一日購買和歷史新高html
+    downloadCSV.download_html(headers=headers,url=historicalHigh_url,state=0,Date=Date)
+    downloadCSV.download_html(headers=headers,url=InvestmentTrust_url1,state=1,Date=Date)
+    downloadCSV.download_html(headers=headers,url=InvestmentTrust_url2,state=2,Date=Date)
+else:
+    print('O今天是假日,跳過抓取投信和歷史新高O')
 
 #抓取csv檔案
 downloadCSV.download_csv(headers=headers,url=url)
